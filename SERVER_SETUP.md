@@ -38,8 +38,8 @@ ssh home-server   # Mac側 ~/.ssh/config の Host home-server ブロック（Por
       `Get-ScheduledTaskInfo` で `LastRunTime` が起動直後・`LastTaskResult: 267009`（実行中）を確認。
       その状態でMacから `ssh home-server 'echo unattended-boot-ok; uptime'` を実行し、
       `unattended-boot-ok` と `up 10 min`（再起動直後と一致）を確認。原計画チェックリスト項目7、完全にクリア。
-- [ ] （任意）退避済みの旧dev-stackディレクトリ `/mnt/d/Server/backup/deprecated/dev-stack-20260809/` の削除判断。
-      中身は空の`.git`のみで実害なし。いつ消してもよいが急ぎではない。
+- [x] ~~退避済みの旧dev-stackディレクトリの削除~~ → **2026-08-12 削除済み**（`/mnt/d/Server/backup/deprecated/dev-stack-20260809/`）。
+      削除前に中身が空の`.git`スケルトンと`docker-compose.yml`（内容は本リポジトリと同一、既に確認済み）のみであることを再確認済み。
 - [ ] （任意）診断のために有効化したWindows Firewallの接続ログ（`LogBlocked`/`LogAllowed`）を無効に戻すか判断。
       現状は害はない（4MB上限、`%systemroot%\system32\LogFiles\Firewall\pfirewall.log`）。
 
