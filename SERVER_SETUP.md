@@ -40,8 +40,8 @@ ssh home-server   # Mac側 ~/.ssh/config の Host home-server ブロック（Por
       `unattended-boot-ok` と `up 10 min`（再起動直後と一致）を確認。原計画チェックリスト項目7、完全にクリア。
 - [x] ~~退避済みの旧dev-stackディレクトリの削除~~ → **2026-08-12 削除済み**（`/mnt/d/Server/backup/deprecated/dev-stack-20260809/`）。
       削除前に中身が空の`.git`スケルトンと`docker-compose.yml`（内容は本リポジトリと同一、既に確認済み）のみであることを再確認済み。
-- [ ] （任意）診断のために有効化したWindows Firewallの接続ログ（`LogBlocked`/`LogAllowed`）を無効に戻すか判断。
-      現状は害はない（4MB上限、`%systemroot%\system32\LogFiles\Firewall\pfirewall.log`）。
+- [x] ~~診断のために有効化したWindows Firewallの接続ログを無効に戻す~~ → **2026-08-12 完了**。
+      `Set-NetFirewallProfile -All -LogBlocked False -LogAllowed False` で既定状態に復元済み。
 
 ## 完了条件チェックリスト（原計画§5 対応状況・2026-08-09時点）
 
