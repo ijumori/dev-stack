@@ -178,6 +178,31 @@ $principal = New-ScheduledTaskPrincipal -UserId "HOME-SERVER\ijumo" -LogonType S
   多行スクリプトは `-Command` へのインライン文字列渡しだと引用符のネストで失敗しやすいため、
   一時`.ps1`ファイルに書いて`-File`で渡す方が確実。
 
+## サーバー上のプロジェクト一覧
+
+`ijumori` GitHubアカウントの全リポジトリを `~/projects/` 配下にclone済み（ext4上、DrvFsではない）。
+
+```
+~/projects/
+├── dev-stack
+├── Fall
+├── ai-company
+├── DDDBWP
+├── claude-skills
+├── marketing
+├── Finance
+├── YellMe
+├── clean-revisions-manager
+├── MyAppLab
+├── kakei-zu
+├── gogyou-calculator
+├── DDDBWP-ANALYTICS
+├── itsumo-rakuraku-kakeizu
+└── ppoi
+```
+
+取得日: 2026-08-12。SSH鍵は既にGitHub認証済みのため、`git@github.com:ijumori/<repo>.git` でいつでも追加clone・pull・pushが可能。
+
 ## dev-stack 構成
 
 `docker-compose.yml` の重複（`/mnt/d/Server/docker/dev-stack/` と本リポジトリ）を解消し、
