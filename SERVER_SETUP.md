@@ -27,8 +27,35 @@ Mac ──SSH:2222 (Tailscale)──→ Ubuntu sshd（ijumoアカウント配下
 
 ## 接続方法
 
+```bash
+ssh home-server
 ```
-ssh home-server   # Mac側 ~/.ssh/config の Host home-server ブロック（Port 2222, User server, StrictHostKeyChecking no は付けない）
+
+接続先の詳細（Mac側 `~/.ssh/config` の `Host home-server` ブロックに設定済み）:
+
+| 項目 | 値 |
+|---|---|
+| IPアドレス | `100.109.138.23`（Tailscale経由。`home-server.tail3edc20.ts.net` でも解決可） |
+| ポート | `2222` |
+| ユーザー | `server` |
+| 鍵 | `~/.ssh/id_ed25519` |
+| `StrictHostKeyChecking no` | 付けない（INV-5） |
+
+Windows側に誰もログインしていなくても常時つながる（2026-08-12 無人再起動テストで確認済み）。
+
+よく使う操作:
+
+```bash
+# サーバー上で1コマンド実行して抜ける
+ssh home-server 'docker ps'
+
+# ファイル転送
+scp ローカルのファイル home-server:送り先のパス
+
+# dev-stack (Postgres/Redis/Node) を操作
+ssh home-server
+cd ~/projects/dev-stack
+docker compose ps
 ```
 
 ## 次にやること（TODO）
