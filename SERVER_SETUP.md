@@ -33,11 +33,11 @@ ssh home-server   # Mac側 ~/.ssh/config の Host home-server ブロック（Por
 
 ## 次にやること（TODO）
 
-- [ ] **（必須・次回Windows再起動時）** 誰もWindowsにログインしない状態で、Macから `ssh home-server 'docker ps'` などが通るか確認する。
-      STEP8のタスクスケジューラを `LogonType: S4U` に修正したが、修正後に手動起動して確認しただけで、
-      実際の「再起動→無人で自動接続」までは未確認（原計画チェックリスト項目7）。
-      失敗する場合は `Get-ScheduledTask -TaskName "WSL-Ubuntu-Keepalive"` の状態と
-      `Get-ScheduledTaskInfo` の `LastTaskResult` から再調査する。
+- [x] ~~誰もWindowsにログインしない状態で、Macから自動接続できるか確認~~ → **2026-08-12 確認済み**。
+      Windowsを完全に再起動し、Claude Codeは再起動後にWSLを一切手動起動せず、
+      `Get-ScheduledTaskInfo` で `LastRunTime` が起動直後・`LastTaskResult: 267009`（実行中）を確認。
+      その状態でMacから `ssh home-server 'echo unattended-boot-ok; uptime'` を実行し、
+      `unattended-boot-ok` と `up 10 min`（再起動直後と一致）を確認。原計画チェックリスト項目7、完全にクリア。
 - [ ] （任意）退避済みの旧dev-stackディレクトリ `/mnt/d/Server/backup/deprecated/dev-stack-20260809/` の削除判断。
       中身は空の`.git`のみで実害なし。いつ消してもよいが急ぎではない。
 - [ ] （任意）診断のために有効化したWindows Firewallの接続ログ（`LogBlocked`/`LogAllowed`）を無効に戻すか判断。
@@ -53,7 +53,7 @@ ssh home-server   # Mac側 ~/.ssh/config の Host home-server ブロック（Por
 | 4 | DockerがUbuntuネイティブ | 済 |
 | 5 | Docker自動起動 | 済 |
 | 6 | sshd自動起動 | 済 |
-| 7 | Windows再起動後・未ログインで接続可 | 修正済みだが**次回の自然な再起動で再確認要**（下記参照） |
+| 7 | Windows再起動後・未ログインで接続可 | 済（2026-08-12、無人再起動テストで確認済み） |
 | 8 | DrvFsでchmod可能（`options="metadata,..."`） | 済 |
 | 9 | pnpmがコンテナ再作成後も残る | 済 |
 | 10 | GitHub接続維持（`ssh -T git@github.com`） | 済 |
