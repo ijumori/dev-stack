@@ -31,6 +31,18 @@ Mac ──SSH:2222 (Tailscale)──→ Ubuntu sshd（ijumoアカウント配下
 ssh home-server   # Mac側 ~/.ssh/config の Host home-server ブロック（Port 2222, User server, StrictHostKeyChecking no は付けない）
 ```
 
+## 次にやること（TODO）
+
+- [ ] **（必須・次回Windows再起動時）** 誰もWindowsにログインしない状態で、Macから `ssh home-server 'docker ps'` などが通るか確認する。
+      STEP8のタスクスケジューラを `LogonType: S4U` に修正したが、修正後に手動起動して確認しただけで、
+      実際の「再起動→無人で自動接続」までは未確認（原計画チェックリスト項目7）。
+      失敗する場合は `Get-ScheduledTask -TaskName "WSL-Ubuntu-Keepalive"` の状態と
+      `Get-ScheduledTaskInfo` の `LastTaskResult` から再調査する。
+- [ ] （任意）退避済みの旧dev-stackディレクトリ `/mnt/d/Server/backup/deprecated/dev-stack-20260809/` の削除判断。
+      中身は空の`.git`のみで実害なし。いつ消してもよいが急ぎではない。
+- [ ] （任意）診断のために有効化したWindows Firewallの接続ログ（`LogBlocked`/`LogAllowed`）を無効に戻すか判断。
+      現状は害はない（4MB上限、`%systemroot%\system32\LogFiles\Firewall\pfirewall.log`）。
+
 ## 完了条件チェックリスト（原計画§5 対応状況・2026-08-09時点）
 
 | # | 項目 | 状態 |
